@@ -10,8 +10,10 @@ class UserSerializers(ModelSerializer):
 
 
 class PostSerializers(ModelSerializer):
-    author = UserSerializers
+    # author = UserSerializers()
     class Meta:
         model = Post
         fields = ['id', 'author', 'title', 'body', 'created', 'updated']
-        depth = 1
+        # depth = 1
+
+    
