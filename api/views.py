@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import *
+from rest_framework import viewsets
 # Create your views here.
 
 # class PostListView(APIView):
@@ -23,21 +24,28 @@ from .permissions import *
 
 
 
-# Shu narsa generic view bilan qilingani
-
-class PostListAPIView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializers
+
+
+
+# Shu narsa generic view bilan qilingani
+
+# class PostListAPIView(generics.ListCreateAPIView):
+#     permission_classes = [IsAuthenticatedOrReadOnly,]
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializers
 
 # class PostCreateAPIView(generics.CreateAPIView):
 #     queryset = Post.objects.all()
 #     serializer_class = PostSerializers
 
-class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthorOrReadOnly,]
-    queryset = Post.objects.all()
-    serializer_class = PostSerializers
+# class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     permission_classes = [IsAuthorOrReadOnly,]
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializers
 
 # class PostDeleteAPIView(generics.DestroyAPIView):
 #     queryset = Post.objects.all()
